@@ -30,9 +30,29 @@ const UpdateDom = (function() {
         const projects = Projects.getProjects();
 
         const project = projects.find(project => project.name == projectName);
+
+        todosDiv.innerHTML = "";
+
+        project.todos.forEach(todo => {
+
+        });
     }
 
-    return { updateProjects };
+    function updateDropdown() {
+        const dropdown = document.getElementById('project');
+
+        dropdown.innerHTML = "";
+        const projects = Projects.getProjects();
+
+        projects.forEach((project) => {
+            const option = document.createElement('option');
+            option.value = project.name;
+            option.textContent = project.name;
+            dropdown.appendChild(option);
+        });
+    }
+
+    return { updateProjects, updateDropdown };
 })();
 
 export default UpdateDom;

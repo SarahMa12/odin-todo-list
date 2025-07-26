@@ -1,5 +1,5 @@
 const Projects = (function() {
-    const projects = [{name: "Project Name", todos: []}];
+    const projects = [createProject("Project Name")];
 
     function createProject(name) {
         const todos = [];
