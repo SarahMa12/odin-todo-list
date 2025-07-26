@@ -14,24 +14,94 @@
 
     <div class="main">
         <div class="sidebar">
-            <h2>Projects</h2>
-            <div class="project">
-                <button>
-                    <img src="./images/folder.svg" alt="" width="30">
-                    Project Name
-                </button>
+            <div class="projects">
+                <h2>Projects</h2>
+                <div class="project">
+                    <button>
+                        <img src="./images/folder.svg" alt="" width="30">
+                        Project Name
+                    </button>
+                </div>
             </div>
-            <div class="project">
-                <button>
-                    <img src="./images/folder.svg" alt="" width="30">
-                    Project Name 2
+            
+            <button class="add-project-btn">
+                <img src="./images/add.svg" alt="" width="30">
+                Add Project
+            </button>
+        </div>
+
+        <div class="wrapper">
+            <div class="project-content">
+                <h2 class="project-name">Project Name</h2>
+                <div class="todos">
+                    <div class="todo">
+                        <div class="left-side">
+                            <input type="checkbox">
+                            <span class="todo-text">Todo Name</span>
+                        </div>
+                        <div class="right-side">
+                            <div>Due Date</div>
+                            <div>X</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-todo-btn">
+                    <img src="./images/add2.svg" alt="" width="34">
+                    Add Todo
                 </button>
             </div>
         </div>
     </div>
+
+    <dialog class="add-project-dialog">
+        <form class="add-project-form">
+            <input type="text" id="name" name="name" placeholder="Project Name" required>
+            <button class="cancel-btn">Cancel</button>
+            <button class="submit-btn" type="submit">Add Project</button>
+        </form>
+    </dialog>
+
+    <dialog class="add-todo-dialog">
+        <form class="add-todo-form">
+            <div class="left-side">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="desc">Description:</label>
+                    <textarea name="desc" id="desc"></textarea>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="form-group">
+                    <label for="due-date">Due Date:</label>
+                    <input type="datetime-local" id="due-date" name="due-date">
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select name="priority" id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="project">Project:</label>
+                    <select name="project" id="project">
+                        
+                    </select>
+                </div>
+
+                <button class="cancel-btn">Cancel</button>
+                <button class="submit-btn" type="submit">Add Todo</button>
+    
+            </div>
+        </form>
+    </dialog>
     
     <footer>
-
+        Created by Sarah Ma
     </footer>
     
 </body>
