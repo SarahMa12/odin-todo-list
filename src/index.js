@@ -12,6 +12,7 @@ const addTodoBtn = document.querySelector('.add-todo-btn');
 const addTodoDialog = document.querySelector('.add-todo-dialog');
 const addTodoCancelBtn = document.querySelector('.add-todo-cancel-btn');
 const addTodoForm = document.querySelector('.add-todo-form');
+const projectBtns = document.querySelectorAll('.project-btn');
 
 // ADD PROJECT
 addProjectBtn.addEventListener('click', () => {
@@ -33,15 +34,8 @@ addProjectForm.addEventListener('submit', (e) => {
     UpdateDom.updateDropdown();
 
     addProjectDialog.close();
-    addProjectDialog.reset();
+    addProjectForm.reset();
 });
-
-projects.forEach((project) => {
-    project.addEventListener('click', () => {
-        UpdateDom.displayTodos();
-    });
-});
-
 
 // ADD TODO
 addTodoBtn.addEventListener('click', () => {
@@ -75,10 +69,20 @@ addTodoForm.addEventListener('submit', (e) => {
         }
     }
 
+    UpdateDom.displayTodos(projectName);
     addTodoDialog.close();
     addTodoForm.reset();
 
 });
 
+
+// PROJECT TODO DISPLAY
+projectBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const name = btn.querySelector('.project-title').textContent.trim();
+        console.log(name);
+        UpdateDom.displayTodos(name);
+    });
+})
 
 UpdateDom.updateDropdown();

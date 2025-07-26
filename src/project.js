@@ -16,10 +16,6 @@ const Projects = (function() {
     }
 
     function getProjects() {
-        for(let project of projects) {
-            console.log(project.name);
-            console.log(project.todos);
-        }
         return projects;
     }
 

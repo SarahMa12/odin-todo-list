@@ -1,5 +1,6 @@
 import Projects from './project.js';
 import folderImg from './images/folder.svg'
+import deleteImg from './images/delete.svg';
 
 const UpdateDom = (function() {
     function updateProjects() {
@@ -11,9 +12,10 @@ const UpdateDom = (function() {
 
         projects.forEach((project) => {
             const btn = document.createElement('button');
+            btn.classList.add('project-btn');
             btn.innerHTML = `
                 <img src="${folderImg}" alt="" width="30">
-                ${project.name}
+                <span class="project-title">${project.name}</span>
             `;
             
             const projectDiv = document.createElement('div');
@@ -26,6 +28,7 @@ const UpdateDom = (function() {
 
     function displayTodos(projectName) {
         const todosDiv = document.querySelector('.todos');
+        todosDiv.innerHTML = "";
 
         const projects = Projects.getProjects();
 
@@ -34,7 +37,40 @@ const UpdateDom = (function() {
         todosDiv.innerHTML = "";
 
         project.todos.forEach(todo => {
+            const checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
 
+            const title = document.createElement('span');
+            title.classList.add('todo-title');
+            title.textContent = todo.title;
+
+            const leftDiv = document.createElement('div');
+            leftDiv.classList.add('left-side');
+            leftDiv.appendChild(checkbox);
+            leftDiv.appendChild(title);
+
+            const dueDate = document.createElement('span');
+            dueDate.classList.add('due-date');
+            dueDate.textContent = todo.dueDate;
+            
+            const delImg = document.createElement('img');
+            delImg.src = deleteImg;
+            delImg.width = "26";
+
+            const delBtn = document.createElement('button');
+            delBtn.appendChild(delImg);
+
+            const rightDiv = document.createElement('div');
+            rightDiv.classList.add('right-side');
+            rightDiv.appendChild(dueDate);
+            rightDiv.appendChild(delBtn);
+
+            const todoDiv = document.createElement('div');
+            todoDiv.classList.add('todo');
+            todoDiv.appendChild(leftDiv);
+            todoDiv.appendChild(rightDiv);
+
+            todosDiv.appendChild(todoDiv);
         });
     }
 
@@ -52,7 +88,7 @@ const UpdateDom = (function() {
         });
     }
 
-    return { updateProjects, updateDropdown };
+    return { updateProjects, displayTodos, updateDropdown };
 })();
 
 export default UpdateDom;
