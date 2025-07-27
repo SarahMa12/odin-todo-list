@@ -1,5 +1,5 @@
 const Projects = (function() {
-    const projects = [createProject("Project Name")];
+    const projects = [createProject("Inbox")];
 
     function createProject(name) {
         const todos = [];
@@ -24,11 +24,16 @@ const Projects = (function() {
         projects.push(project);
     }
 
+    function removeProject(name) {
+        const index = projects.findIndex(project => project.name === name);
+        projects.splice(index, 1);
+    }
+
     function clearProjects() {
         projects.length = 0;
     }
 
-    return { getProjects, addProject, clearProjects }; 
+    return { getProjects, addProject, removeProject, clearProjects }; 
 
 })();
 

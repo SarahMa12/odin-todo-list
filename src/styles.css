@@ -102,7 +102,7 @@ header {
   display: flex;
   flex-direction: column;
   background-color: #C7D3DD;
-  width: 20vw;
+  width: clamp(200px, 20vw, 100%);
   padding: 20px 30px;
   gap: 6px;
 }
@@ -226,4 +226,13 @@ footer {
 
 .project-btn.active {
   background-color: #bac4ca;
+}
+
+.del-btn {
+  margin-left: auto;
+}
+
+
+.del-btn {
+  background-color: transparent !important;
 }

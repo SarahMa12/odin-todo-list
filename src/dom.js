@@ -24,8 +24,8 @@ const UpdateDom = (function() {
         displayTodos(projectName)
     }
 
-    function updateProjects() {
 
+    function updateProjects() {
         const projectsDiv = document.querySelector('.projects');
 
         projectsDiv.innerHTML = "<h2>Projects</h2>";
@@ -41,15 +41,35 @@ const UpdateDom = (function() {
                 <img src="${folderImg}" alt="" width="30">
                 <span class="project-title">${project.name}</span>
             `;
+
+            if (project.name !== "Inbox") {
+                const delImg = document.createElement('img');
+                delImg.src = deleteImg;
+                delImg.width = 26;
+
+                const delDiv = document.createElement('div');
+                delDiv.classList.add('del-btn');
+                delDiv.appendChild(delImg);
+
+                delDiv.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    Projects.removeProject(project.name);
+                    saveProjectsToLocalStorage();
+
+                    updateProjects();
+                    updateDropdown();
+                });
+                btn.appendChild(delDiv);
+            }
+            
             
             const projectDiv = document.createElement('div');
             projectDiv.classList.add('project');
             projectDiv.appendChild(btn);
-
-            createProjectBtnListener(btn, project);
-
             projectsDiv.appendChild(projectDiv);
-        });
+        
+            createProjectBtnListener(btn, project);
+        });  
     }
 
     function createDelBtnListener(delBtn, project, todo) {
@@ -128,6 +148,9 @@ const UpdateDom = (function() {
         project.todos.forEach(todo => {
             const checkbox = document.createElement('input');
             checkbox.type = "checkbox";
+            checkbox.addEventListener('click', (event) => {
+                event.stopPropagation();
+            });
 
             const title = document.createElement('span');
             title.classList.add('todo-title');
@@ -186,7 +209,7 @@ const UpdateDom = (function() {
         });
     }
 
-    return { updateProjects, displayTodos, updateDropdown };
+    return { updateProjects, displayTodos, updateDropdown, setActive };
 })();
 
 export default UpdateDom;

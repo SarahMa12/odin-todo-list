@@ -48,8 +48,14 @@ function loadProjectsFromLocalStorage() {
               console.log("Todo added!");
           });
         });
+
         UpdateDom.updateProjects();
         UpdateDom.updateDropdown();
+
+        const inboxBtn = document.querySelector('.project-btn'); // first project = Inbox
+        if (inboxBtn) {
+            UpdateDom.setActive(inboxBtn, 'Inbox');
+        }
 
         const projects = Projects.getProjects();
         if (projects.length > 0) {
