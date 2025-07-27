@@ -40,6 +40,11 @@
   cursor: pointer;
 }
 
+.due-date {
+  margin-top: 4px;
+  font-size: 20px;
+}
+
 .left-side input:checked::after {
   content: "";
   position: absolute;
@@ -57,12 +62,37 @@
 }
 
 .todos {
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 gap: 16px;
 }
 
 .del-btn {
-border: none;
-background-color: #f4fbff;
+  border: none;
+  background-color: #f4fbff;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  border: 1px solid #37393A;
+  padding: 14px 10px;
+  border-radius: 5px;
+}
+
+.details .l, .details .r {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.details b {
+  color: #37393A;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

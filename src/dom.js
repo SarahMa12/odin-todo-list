@@ -1,6 +1,10 @@
 import Projects from './project.js';
 import folderImg from './images/folder.svg'
 import deleteImg from './images/delete.svg';
+import { format } from 'date-fns';
+import { saveProjectsToLocalStorage } from './storage.js'
+
+
 
 const UpdateDom = (function() {
     function createProjectBtnListener(btn, project) {
@@ -53,6 +57,59 @@ const UpdateDom = (function() {
             const i = project.todos.findIndex(t => t.title === todo.title);
             project.removeTodo(i);
             displayTodos(project.name);   
+            saveProjectsToLocalStorage();
+        });
+    }
+
+    function addTodoDetailsDropdown(wrapper, todo) {
+        wrapper.addEventListener('click', () => {
+            const existingDetails = wrapper.querySelector('.details');
+
+            if (existingDetails) {
+                wrapper.removeChild(existingDetails);
+                return;
+            }
+
+            const title = todo.title;
+            const dueDate = todo.dueDate;
+            const desc = todo.desc;
+            const priority = todo.priority;
+
+            let formatted = "";
+            if(!dueDate == "") {
+                const date = new Date(dueDate);
+                formatted = format(date, 'M/d/yyyy, hh:mm:ss a');
+            } else {
+                formatted = "N/A";
+            }
+
+            const titleDiv = document.createElement('div');
+            titleDiv.innerHTML  = `<b>Title:</b> ${title}`;
+            const dueDateDiv = document.createElement('div');
+            dueDateDiv.innerHTML  = `<b>Due Date:</b> ${formatted}`;
+
+            const descDiv = document.createElement('div');
+            descDiv.innerHTML  = `<b>Description:</b> ${desc}`;
+            const priorityDiv = document.createElement('div');
+            priorityDiv.innerHTML  = `<b>Priority:</b> ${priority.charAt(0).toUpperCase() + priority.slice(1)}`;
+
+            const left = document.createElement('div');
+            left.classList.add('l');
+            left.appendChild(titleDiv);
+            left.appendChild(dueDateDiv);
+
+            const right = document.createElement('div');
+            right.classList.add('r');
+            right.appendChild(descDiv);
+            right.appendChild(priorityDiv);
+
+            const detailsDiv = document.createElement('div');
+            detailsDiv.classList.add('details');    
+            detailsDiv.appendChild(left);
+            detailsDiv.appendChild(right);
+
+            wrapper.appendChild(detailsDiv);
+            
         });
     }
 
@@ -105,7 +162,13 @@ const UpdateDom = (function() {
             todoDiv.appendChild(leftDiv);
             todoDiv.appendChild(rightDiv);
 
-            todosDiv.appendChild(todoDiv);
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('wrap');
+
+            wrapper.appendChild(todoDiv);
+            todosDiv.appendChild(wrapper);
+
+            addTodoDetailsDropdown(wrapper, todo);
         });
     }
 

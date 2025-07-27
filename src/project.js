@@ -24,7 +24,11 @@ const Projects = (function() {
         projects.push(project);
     }
 
-    return { getProjects, addProject }; 
+    function clearProjects() {
+        projects.length = 0;
+    }
+
+    return { getProjects, addProject, clearProjects }; 
 
 })();
 

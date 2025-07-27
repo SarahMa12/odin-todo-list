@@ -3,8 +3,9 @@ import './project-content.css'
 import './dialog.css'
 import UpdateDom from './dom.js'
 import Projects from './project.js';
-import { createToDo, addToDoToProject } from './todo.js';
+import { createToDo } from './todo.js';
 import { format } from 'date-fns';
+import { saveProjectsToLocalStorage, loadProjectsFromLocalStorage } from './storage.js'
 
 const addProjectBtn = document.querySelector('.add-project-btn');
 const addProjectDialog = document.querySelector('.add-project-dialog');
@@ -30,12 +31,12 @@ addProjectForm.addEventListener('submit', (e) => {
 
     const name = addProjectForm.name.value;
     Projects.addProject(name);
-    Projects.getProjects();
+
+    saveProjectsToLocalStorage();
 
     UpdateDom.updateProjects();
     UpdateDom.updateDropdown();
-
-    // attachProjectBtnListeners();
+    
 
     addProjectDialog.close();
     addProjectForm.reset();
@@ -61,7 +62,7 @@ addTodoForm.addEventListener('submit', (e) => {
 
     if(!dueDate == "") {
         const date = new Date(dueDate);
-        var formatted = format(date, 'MMMM d, yyyy');
+        var formatted = format(date, 'MMMM d');
     }
         
     const todo = createToDo(title, desc, formatted, priority);
@@ -70,6 +71,8 @@ addTodoForm.addEventListener('submit', (e) => {
     const project = projects.find((project) => project.name == projectName);
 
     project.addToDo(todo);
+
+    saveProjectsToLocalStorage();
 
     UpdateDom.displayTodos(projectName);
     addTodoDialog.close();
@@ -84,3 +87,4 @@ function initPage() {
 }
 
 initPage();
+loadProjectsFromLocalStorage();
