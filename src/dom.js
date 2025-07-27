@@ -4,6 +4,14 @@ import deleteImg from './images/delete.svg';
 
 const UpdateDom = (function() {
     function updateProjects() {
+
+        function createProjectBtnListener(btn, project) {
+            btn.addEventListener('click', () => {
+                displayTodos(project.name);
+                console.log(`${project.name} clicked!`);
+            });
+        }
+
         const projectsDiv = document.querySelector('.projects');
 
         projectsDiv.innerHTML = "<h2>Projects</h2>";
@@ -22,19 +30,31 @@ const UpdateDom = (function() {
             projectDiv.classList.add('project');
             projectDiv.appendChild(btn);
 
+            createProjectBtnListener(btn, project);
+            
             projectsDiv.appendChild(projectDiv);
         });
     }
 
+    function createDelBtnListener(delBtn, project, todo) {
+            delBtn.addEventListener('click', () => {
+            const i = project.todos.findIndex(t => t.title === todo.title);
+            project.removeTodo(i);
+            displayTodos(project.name);   
+        });
+    }
+
     function displayTodos(projectName) {
+        const name = document.querySelector('.project-name');
+        name.innerHTML = "";
+        name.textContent = projectName;
+
         const todosDiv = document.querySelector('.todos');
         todosDiv.innerHTML = "";
 
         const projects = Projects.getProjects();
 
         const project = projects.find(project => project.name == projectName);
-
-        todosDiv.innerHTML = "";
 
         project.todos.forEach(todo => {
             const checkbox = document.createElement('input');
@@ -58,7 +78,10 @@ const UpdateDom = (function() {
             delImg.width = "26";
 
             const delBtn = document.createElement('button');
+            delBtn.classList.add('del-btn');
             delBtn.appendChild(delImg);
+
+            createDelBtnListener(delBtn, project, todo);
 
             const rightDiv = document.createElement('div');
             rightDiv.classList.add('right-side');

@@ -1,0 +1,67 @@
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #f4fbff;
+  flex: 1;
+  padding: 40px 50px;
+}
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-name {
+  font-size: 30px;
+  color: #163147;
+}
+
+.todo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-side, .right-side {
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.left-side input {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  appearance: none;
+  border: 2px solid rgb(90, 90, 90);
+  position: relative;
+  cursor: pointer;
+}
+
+.left-side input:checked::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #77B6EA;
+}
+
+.left-side input:checked + .todo-title {
+  text-decoration: line-through;
+  color: rgb(90, 90, 90);
+}
+
+.todos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.del-btn {
+    border: none;
+    background-color: #f4fbff;
+}

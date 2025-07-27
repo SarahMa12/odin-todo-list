@@ -1,7 +1,9 @@
 import './styles.css';
+import './project-content.css'
 import UpdateDom from './dom.js'
 import Projects from './project.js';
 import { createToDo, addToDoToProject } from './todo.js';
+import { format } from 'date-fns';
 
 const addProjectBtn = document.querySelector('.add-project-btn');
 const addProjectDialog = document.querySelector('.add-project-dialog');
@@ -12,7 +14,6 @@ const addTodoBtn = document.querySelector('.add-todo-btn');
 const addTodoDialog = document.querySelector('.add-todo-dialog');
 const addTodoCancelBtn = document.querySelector('.add-todo-cancel-btn');
 const addTodoForm = document.querySelector('.add-todo-form');
-const projectBtns = document.querySelectorAll('.project-btn');
 
 // ADD PROJECT
 addProjectBtn.addEventListener('click', () => {
@@ -32,6 +33,8 @@ addProjectForm.addEventListener('submit', (e) => {
 
     UpdateDom.updateProjects();
     UpdateDom.updateDropdown();
+
+    // attachProjectBtnListeners();
 
     addProjectDialog.close();
     addProjectForm.reset();
@@ -55,7 +58,10 @@ addTodoForm.addEventListener('submit', (e) => {
     const priority = addTodoForm.priority.value;
     const projectName = addTodoForm.project.value;
 
-    const todo = createToDo(title, desc, dueDate, priority);
+    const date = new Date(dueDate);
+    const formatted = format(date, 'MMMM d, yyyy');
+
+    const todo = createToDo(title, desc, formatted, priority);
 
     const projects = Projects.getProjects();
     const project = projects.find((project) => project.name == projectName);
@@ -75,14 +81,9 @@ addTodoForm.addEventListener('submit', (e) => {
 
 });
 
+function initPage() {
+    UpdateDom.updateProjects();
+    UpdateDom.updateDropdown();
+}
 
-// PROJECT TODO DISPLAY
-projectBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-        const name = btn.querySelector('.project-title').textContent.trim();
-        console.log(name);
-        UpdateDom.displayTodos(name);
-    });
-})
-
-UpdateDom.updateDropdown();
+initPage();
