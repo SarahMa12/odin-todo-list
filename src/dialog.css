@@ -1,0 +1,97 @@
+.add-project-dialog {
+    border: none;
+    margin: auto;
+    border-radius: 10px;
+    width: 500px;
+    height: 200px;
+}
+
+.add-project-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.add-project-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-project-form .form-group input {
+    height: 34px;
+}
+
+.add-project-form legend, .add-todo-form legend {
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: -8px;
+}
+
+.add-project-form label {
+    font-size: 18px;
+}
+
+.btns {
+    display: flex;
+    gap: 6px;
+    justify-content: end;
+}
+
+.btns .submit-btn {
+    background-color: #37393A;
+    color: #e2eaee;
+}
+
+.btns .add-project-cancel-btn, .btns .add-todo-cancel-btn {
+    background-color: white;
+    border: 1px solid #37393A;
+}
+
+.btns * {
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.add-todo-dialog {
+    border: none;
+    margin: auto;
+    border-radius: 10px;
+    width: 500px;
+    height: 356px;
+}
+
+.add-todo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.add-todo-dialog .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-todo-form .left, .add-todo-form .right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.add-todo-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-todo-form .form-group label {
+    font-size: 18px;
+}
+
+.add-todo-form input, .add-todo-form select {
+    width: 224px;
+    height: 30px;
+}
+
+.add-todo-form textarea {
+    height: 106px;
+}

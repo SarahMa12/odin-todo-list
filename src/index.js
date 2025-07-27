@@ -1,5 +1,6 @@
 import './styles.css';
 import './project-content.css'
+import './dialog.css'
 import UpdateDom from './dom.js'
 import Projects from './project.js';
 import { createToDo, addToDoToProject } from './todo.js';
@@ -58,9 +59,11 @@ addTodoForm.addEventListener('submit', (e) => {
     const priority = addTodoForm.priority.value;
     const projectName = addTodoForm.project.value;
 
-    const date = new Date(dueDate);
-    const formatted = format(date, 'MMMM d, yyyy');
-
+    if(!dueDate == "") {
+        const date = new Date(dueDate);
+        var formatted = format(date, 'MMMM d, yyyy');
+    }
+        
     const todo = createToDo(title, desc, formatted, priority);
 
     const projects = Projects.getProjects();
@@ -68,19 +71,13 @@ addTodoForm.addEventListener('submit', (e) => {
 
     project.addToDo(todo);
 
-    for(let project of projects) {
-        console.log("Project name: " + project.name);
-        for(let todo of project.todos) {
-            console.log("Todo item: " + todo.title);
-        }
-    }
-
     UpdateDom.displayTodos(projectName);
     addTodoDialog.close();
     addTodoForm.reset();
 
 });
 
+// INITIALIZE PAGE
 function initPage() {
     UpdateDom.updateProjects();
     UpdateDom.updateDropdown();

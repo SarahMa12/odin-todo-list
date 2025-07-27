@@ -27,6 +27,7 @@
   display: flex;
   gap: 10px;
   font-size: 20px;
+  align-items: center;
 }
 
 .left-side input {
@@ -47,7 +48,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #77B6EA;
+  background-color: #496f8f;
 }
 
 .left-side input:checked + .todo-title {
@@ -56,12 +57,12 @@
 }
 
 .todos {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+display: flex;
+flex-direction: column;
+gap: 16px;
 }
 
 .del-btn {
-    border: none;
-    background-color: #f4fbff;
+border: none;
+background-color: #f4fbff;
 }

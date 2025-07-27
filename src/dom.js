@@ -3,14 +3,24 @@ import folderImg from './images/folder.svg'
 import deleteImg from './images/delete.svg';
 
 const UpdateDom = (function() {
-    function updateProjects() {
+    function createProjectBtnListener(btn, project) {
+        btn.addEventListener('click', () => {
+            displayTodos(project.name);
+            setActive(btn, project.name);
+        });
+    }
 
-        function createProjectBtnListener(btn, project) {
-            btn.addEventListener('click', () => {
-                displayTodos(project.name);
-                console.log(`${project.name} clicked!`);
-            });
-        }
+    function setActive(btn, projectName) {
+        const projectBtns = document.querySelectorAll('.project-btn');
+        projectBtns.forEach((button) => {
+            button.classList.remove('active');
+        })
+
+        btn.classList.add('active');
+        displayTodos(projectName)
+    }
+
+    function updateProjects() {
 
         const projectsDiv = document.querySelector('.projects');
 
@@ -21,6 +31,8 @@ const UpdateDom = (function() {
         projects.forEach((project) => {
             const btn = document.createElement('button');
             btn.classList.add('project-btn');
+            setActive(btn, project.name);
+            
             btn.innerHTML = `
                 <img src="${folderImg}" alt="" width="30">
                 <span class="project-title">${project.name}</span>
@@ -31,7 +43,7 @@ const UpdateDom = (function() {
             projectDiv.appendChild(btn);
 
             createProjectBtnListener(btn, project);
-            
+
             projectsDiv.appendChild(projectDiv);
         });
     }
